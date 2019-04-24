@@ -35,7 +35,10 @@ public class StockJobConfig {
     }
 
     @Bean(initMethod = "init")
-    public JobScheduler simpleJobScheduler(final StockSimpleJob simpleJob, @Value("${stockJob.cron}") final String cron, @Value("${stockJob.shardingTotalCount}") final int shardingTotalCount, @Value("${stockJob.shardingItemParameters}") final String shardingItemParameters) {
+    public JobScheduler simpleJobScheduler(final StockSimpleJob simpleJob,
+                                           @Value("${stockJob.cron}") final String cron,
+                                           @Value("${stockJob.shardingTotalCount}") final int shardingTotalCount,
+                                           @Value("${stockJob.shardingItemParameters}") final String shardingItemParameters) {
         return new SpringJobScheduler(simpleJob, regCenter, simpleJobConfigBuilder(simpleJob.getClass(), cron, shardingTotalCount, shardingItemParameters));
     }
 
